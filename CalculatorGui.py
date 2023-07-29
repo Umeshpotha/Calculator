@@ -1,0 +1,118 @@
+from tkinter import *
+import tkinter.messagebox as tmsg
+
+def click(event):
+    text=event.widget.cget("text")
+    if text=="=":
+        if scvalue.get().isdigit():
+            value=int(scvalue.get())
+        else:
+            try:
+                value=eval(screen.get())
+            except Exception as e :
+                scvalue.set("Error")
+                screen.update()
+
+            
+        scvalue.set(value)
+        screen.update()    
+    elif text=="C":
+        scvalue.set("")
+        screen.update()
+    else:
+        scvalue.set(scvalue.get()+text)
+        screen.update()
+def on_close():
+    response=tmsg.askyesno('Exit','Are you sure you want to exit?')
+    if response:
+        root.destroy()  
+def funcdel(event1):
+    if event1:
+        length=len(scvalue.get())
+        var=scvalue.get()
+        scvalue.set(var[:length-1])             
+root=Tk()
+root.geometry("644x700")
+root.title("MY CALCULATOR")
+root.wm_iconbitmap("Calculator_31111.ico")
+scvalue=StringVar()
+scvalue.set("")
+screen= Entry(root,textvar=scvalue,font='lucida 40 bold')
+screen.pack(fill=X,padx=19,pady=10,ipadx=8,anchor="n")
+
+f=Frame(root,bg="lightgrey")
+b=Button(f,text="9",bg="white",font="lucida 35 bold")
+b.pack(side="left",anchor=W,padx=18,pady=12)
+b.bind("<Button-1>",click)
+b=Button(f,text="8",bg="white",font="lucida 35 bold")
+b.pack(side="left",anchor=W,padx=18,pady=12)
+b.bind("<Button-1>",click)
+b=Button(f,text="7",bg="white",font="lucida 35 bold")
+b.pack(side="left",anchor=W,padx=18,pady=12)
+b.bind("<Button-1>",click)
+b=Button(f,text="C",bg="white",font="lucida 35 bold")
+b.pack(side="left",anchor=W,padx=8,pady=12)
+b.bind("<Button-1>",click)
+f.pack()
+
+f=Frame(root,bg="lightgrey")
+b=Button(f,text="6",bg="white",font="lucida 35 bold")
+b.pack(side="left",anchor=W,padx=18,pady=12)
+b.bind("<Button-1>",click)
+b=Button(f,text="5",bg="white",font="lucida 35 bold")
+b.pack(side="left",anchor=W,padx=18,pady=12)
+b.bind("<Button-1>",click)
+b=Button(f,text="4",bg="white",font="lucida 35 bold")
+b.pack(side="left",anchor=W,padx=18,pady=12)
+b.bind("<Button-1>",click)
+b=Button(f,text="/",bg="white",font="lucida 35 bold")
+b.pack(side="left",anchor=W,padx=18,pady=12)
+b.bind("<Button-1>",click)
+f.pack()
+
+f=Frame(root,bg="lightgrey")
+b=Button(f,text="3",bg="white",font="lucida 35 bold")
+b.pack(side="left",anchor=W,padx=18,pady=12)
+b.bind("<Button-1>",click)
+b=Button(f,text="2",bg="white",font="lucida 35 bold")
+b.pack(side="left",anchor=W,padx=18,pady=12)
+b.bind("<Button-1>",click)
+b=Button(f,text="1",bg="white",font="lucida 35 bold")
+b.pack(side="left",anchor=W,padx=18,pady=12)
+b.bind("<Button-1>",click)
+b=Button(f,text="*",bg="white",font="lucida 35 bold")
+b.pack(side="left",anchor=W,padx=15,pady=12)
+b.bind("<Button-1>",click)
+f.pack()
+
+f=Frame(root,bg="lightgrey")
+b=Button(f,text=".",bg="white",font="lucida 35 bold")
+b.pack(side="left",anchor=W,padx=18,pady=12)
+b.bind("<Button-1>",click)
+b=Button(f,text="0",bg="white",font="lucida 35 bold")
+b.pack(side="left",anchor=W,padx=18,pady=12)
+b.bind("<Button-1>",click)
+b=Button(f,text="+",bg="white",font="lucida 35 bold")
+b.pack(side="left",anchor=W,padx=18,pady=12)
+b.bind("<Button-1>",click)
+b=Button(f,text="-",bg="white",font="lucida 35 bold")
+b.pack(side="left",anchor=W,padx=21,pady=12)
+b.bind("<Button-1>",click)
+f.pack()
+
+f=Frame(root,bg="lightgrey")
+b=Button(f,text="ln",bg="white",font="lucida 35 bold")
+b.pack(side="left",anchor=W,padx=11,pady=12)
+b.bind("<Button-1>",click)
+b=Button(f,text="%",bg="white",font="lucida 35 bold")
+b.pack(side="left",anchor=W,padx=11,pady=12)
+b.bind("<Button-1>",click)
+b=Button(f,text="X",bg="white",font="lucida 35 bold")
+b.pack(side="left",anchor=W,padx=11,pady=12)
+b.bind("<Button-1>",funcdel)
+b=Button(f,text="=",bg="white",font="lucida 35 bold")
+b.pack(side="left",anchor=W,padx=11,pady=12)
+b.bind("<Button-1>",click)
+f.pack()
+root.protocol('WM_DELETE_WINDOW',on_close)
+root.mainloop()
